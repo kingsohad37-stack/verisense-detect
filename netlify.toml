@@ -1,0 +1,24 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/health"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/detect-image"
+  to = "/.netlify/functions/detect?kind=image"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/detect-video"
+  to = "/.netlify/functions/detect?kind=video"
+  status = 200
+  force = true
