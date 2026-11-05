@@ -45,3 +45,13 @@ body::after{content:"";position:fixed;inset:0;z-index:18;pointer-events:none;opa
 #vs-cinema-overlay .vs-orbit,#vs-cinema-overlay .vs-core-glow,#vs-cinema-overlay .vs-reticle{will-change:transform}
 @media(max-width:700px){#vs-cinema-overlay .vs-orbit{width:56vw;left:74%;top:35%}#vs-cinema-overlay .vs-core-glow{width:68vw;left:74%;top:35%}#vs-cinema-overlay .vs-reticle{left:74%;top:35%}}
 @media(prefers-reduced-motion:reduce){#vs-cinema-overlay *{animation:none!important}}
+
+/* CINEMATIC PASS 03 — scroll camera + layered depth */
+.home-art{--vs-camera-scale:1;--vs-camera-y:0px;--vs-camera-rotate:0deg}
+.home-art #vs-cinema-overlay{transform:translate3d(0,var(--vs-camera-y),0) scale(var(--vs-camera-scale));transform-origin:68% 42%;filter:brightness(calc(1 + var(--vs-scroll-energy,0)*.16))}
+.home-art #vs-cinema-overlay .vs-orbit{transform:translate(-50%,-50%) rotateX(68deg) rotate(calc(-22deg + var(--vs-camera-rotate)))}
+.home-art #vs-cinema-overlay .vs-core-glow{transform:translate(calc(-50% + var(--vs-pointer-x,0)*18px),calc(-50% + var(--vs-pointer-y,0)*14px)) scale(calc(1 + var(--vs-scroll-energy,0)*.12))}
+.home-art #vs-film-canvas,.home-art #vs-cine-canvas{opacity:.58}
+.home-art #vs-cinema-overlay canvas{opacity:.9}
+@media(max-width:700px){.home-art #vs-cinema-overlay{opacity:.76}.home-art #vs-cinema-overlay .vs-scanline{animation-duration:11s}}
+@media(prefers-reduced-motion:reduce){.home-art #vs-cinema-overlay{transform:none!important;filter:none!important}}
