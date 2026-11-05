@@ -1,0 +1,21 @@
+/* VeriSense cinematic atmosphere — additive visual layer only; no layout or detector changes. */
+:root{--vs-cyan:rgba(96,183,255,.22);--vs-gold:rgba(224,190,130,.18)}
+html{background:#03070d}
+body{background:#03070d}
+body::after{content:"";position:fixed;inset:0;z-index:18;pointer-events:none;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");mix-blend-mode:soft-light}
+.site{isolation:isolate;background:radial-gradient(ellipse at 50% 0%,rgba(29,87,139,.18),transparent 48%),radial-gradient(ellipse at 92% 58%,rgba(155,112,55,.10),transparent 35%),#03070d}
+.site::before{opacity:.8;background:linear-gradient(112deg,transparent 20%,rgba(113,190,255,.035) 48%,transparent 68%),radial-gradient(ellipse at 50% 0%,rgba(60,137,205,.12),transparent 62%)}
+.home-art{isolation:isolate}
+.home-art::before{content:"";position:absolute;inset:-18%;z-index:1;pointer-events:none;background:conic-gradient(from 212deg at 72% 34%,transparent 0deg,rgba(87,177,255,.09) 8deg,transparent 19deg,transparent 31deg,rgba(230,193,131,.075) 39deg,transparent 51deg),radial-gradient(ellipse at 74% 28%,rgba(71,153,224,.20),transparent 38%),radial-gradient(ellipse at 12% 86%,rgba(54,126,196,.14),transparent 36%);mix-blend-mode:screen;animation:vsAtmosphere 18s ease-in-out infinite alternate}
+.home-art::after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:linear-gradient(90deg,rgba(1,5,12,.28),transparent 18%,transparent 82%,rgba(1,5,12,.34)),linear-gradient(0deg,rgba(1,5,12,.22),transparent 26%,transparent 75%,rgba(1,5,12,.12));box-shadow:inset 0 0 110px rgba(0,0,0,.25)}
+#vs-cine-canvas,#vs-film-canvas{position:absolute!important;inset:0!important;z-index:3!important;pointer-events:none!important;mix-blend-mode:screen}
+.hero-img{will-change:transform;backface-visibility:hidden}
+.topbar{border-bottom-color:rgba(145,194,231,.18);box-shadow:0 8px 35px rgba(0,0,0,.18)}
+.topbar.scrolled{border-bottom-color:rgba(130,190,236,.30)}
+.glass{border-color:rgba(170,205,228,.19);box-shadow:0 24px 80px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.10),0 0 34px rgba(55,133,192,.045)}
+.glass:hover{box-shadow:0 26px 85px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.13),0 0 42px rgba(75,159,222,.12)}
+.pill.primary{box-shadow:0 8px 30px rgba(183,154,100,.22),0 0 26px rgba(115,177,224,.13),inset 0 1px 0 #fff9}
+.page-shell{position:relative}
+.page-shell::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 8% 12%,rgba(52,132,194,.075),transparent 38%),radial-gradient(ellipse at 92% 70%,rgba(194,157,103,.055),transparent 36%)}
+@keyframes vsAtmosphere{0%{transform:translate3d(-1.5%,.5%,0) scale(1);filter:hue-rotate(-5deg)}100%{transform:translate3d(1.5%,-1%,0) scale(1.045);filter:hue-rotate(8deg)}}
+@media(prefers-reduced-motion:reduce){.home-art::before{animation:none}body::after{display:none}}
