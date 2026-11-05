@@ -55,3 +55,13 @@ body::after{content:"";position:fixed;inset:0;z-index:18;pointer-events:none;opa
 .home-art #vs-cinema-overlay canvas{opacity:.9}
 @media(max-width:700px){.home-art #vs-cinema-overlay{opacity:.76}.home-art #vs-cinema-overlay .vs-scanline{animation-duration:11s}}
 @media(prefers-reduced-motion:reduce){.home-art #vs-cinema-overlay{transform:none!important;filter:none!important}}
+
+
+/* PASS 04 — continuous cinematic scroll: retain all original section geometry. */
+.page{display:block!important;visibility:visible!important;min-height:calc(100vh - var(--hh,76px));}
+.page[aria-hidden="true"]{visibility:visible!important;}
+.page.active{display:block!important;}
+#page-home{padding-bottom:clamp(44px,7vh,90px);}
+#page-detect,#page-about{position:relative;isolation:isolate;}
+#page-detect::before,#page-about::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 12% 18%,rgba(67,145,207,.075),transparent 42%),radial-gradient(ellipse at 88% 72%,rgba(210,174,112,.045),transparent 38%);}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important;}}
