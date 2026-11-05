@@ -47,11 +47,11 @@ main{position:relative;z-index:1;padding-top:76px}.page{display:none;min-height:
 @media(max-width:560px){.two{grid-template-columns:1fr}.nav button{font-size:11px}.fab{width:48px;height:48px}.fab.main{width:56px;height:56px}.cta-band .pill{width:100%}}
 @media(prefers-reduced-motion:reduce){.orb,.fab.main{animation:none}.rv{opacity:1;transform:none;transition:none}}
 
-/* ===== Continuous scroll mode ===== */
-.page{display:block!important;min-height:0;animation:none;scroll-margin-top:76px}#page-home{min-height:0}
-.page+.page .page-shell{border-top:1px solid rgba(222,204,171,.1)}
-@media(max-width:850px){.page{scroll-margin-top:68px}}@media(max-width:560px){.page{scroll-margin-top:103px}}
-.progress{position:fixed;left:0;top:0;height:2px;width:0;z-index:50;background:linear-gradient(90deg,#bda77e,#f0e4ce);box-shadow:0 0 12px #d8c19a}
+/* ===== True multi-page navigation ===== */
+.page{display:none!important;min-height:calc(100vh - var(--hh,76px));animation:appear .55s ease both}
+.page.active{display:block!important}
+.page[aria-hidden="true"]{visibility:hidden}
+.progress{display:none}
 
 /* ===== Polish: consistent frames, readability, approachability ===== */
 :root{--ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--edge:max(clamp(20px,5vw,72px),calc((100vw - 1320px)/2 + clamp(20px,5vw,72px)))}
@@ -178,7 +178,7 @@ body.vs-intro-active{overflow:hidden}
 <header class="topbar">
   <a class="brand" href="#" data-page="home" aria-label="VeriSense home"><span class="brand-mark"></span><span>VERISENSE</span></a>
   <nav class="nav" aria-label="Main navigation">
-    <button class="active" data-page="home">Home</button><button data-page="detect">Detect</button><button data-page="method">Method</button><button data-page="about">About</button>
+    <button class="active" data-page="home">Home</button><button data-page="detect">Detect</button><button data-page="about">About</button>
   </nav>
   <button class="pill" data-page="detect">Start Detection <span class="arrow">↗</span></button>
 </header>
@@ -192,7 +192,7 @@ body.vs-intro-active{overflow:hidden}
     <button class="home-hotspot hs-video" data-kind="video" aria-label="Video detection"></button>
     <button class="home-hotspot hs-audio" data-kind="audio" aria-label="Audio detection"></button>
   </div></div>
-  <div class="home-cta"><button class="pill primary" data-page="detect">Start Detection <span class="arrow">↗</span></button><button class="pill" data-page="method">How it works</button></div>
+  <div class="home-cta"><button class="pill primary" data-page="detect">Start Detection <span class="arrow">↗</span></button><button class="pill" data-page="about">How it works</button></div>
   </div>
 </section>
 <section class="page" id="page-detect" aria-label="Detection workspace">
@@ -215,28 +215,6 @@ body.vs-intro-active{overflow:hidden}
         <section class="glass side-card"><div class="eyebrow">Built for clarity</div><h3>Every detail matters.</h3><p>Image, video and audio each need purpose-built analysis. This interface keeps the workflow focused on the selected media type.</p><div style="margin-top:22px"><button class="pill" data-page="about">Explore VeriSense <span class="arrow">↗</span></button></div></section>
       </aside>
     </div>
-  </div>
-</section>
-<section class="page" id="page-method" aria-label="Method">
-  <div class="page-shell">
-    <div class="page-head"><div><div class="eyebrow">The method</div><h1 class="display">Seen clearly.<br><em class="grad">Explained honestly.</em></h1></div><p class="lede">How VeriSense is designed to move from a raw file to a qualified finding—with every stage visible and nothing inferred beyond the evidence.</p></div>
-    <div class="timeline">
-      <div class="glass tl"><div class="n">01</div><h4>Intake</h4><p>Choose image, video or audio. Files are uploaded to the connected analysis service when you start a scan.</p></div>
-      <div class="glass tl"><div class="n">02</div><h4>Integrity review</h4><p>Format, structure and metadata are checked before any analysis.</p></div>
-      <div class="glass tl"><div class="n">03</div><h4>Model analysis</h4><p>Your connected detection engine examines the media for its type.</p></div>
-      <div class="glass tl"><div class="n">04</div><h4>Qualified findings</h4><p>Signals and uncertainty are shown together, for human judgment.</p></div>
-    </div>
-    <div class="panel-split">
-      <div class="glass"><div class="eyebrow">Per-media pathways</div><h2>Built for each<br><em class="grad">kind of media.</em></h2><p>Each pathway is intended to host its own purpose-built analysis. Choose one to see the kinds of signals a connected model could examine.</p><div class="mode-row" role="tablist" aria-label="Media pathway"><button class="mode active" data-sig="image">Image</button><button class="mode" data-sig="video">Video</button><button class="mode" data-sig="audio">Audio</button></div></div>
-      <div class="glass"><div class="eyebrow" id="sigTitle">Image · areas of review</div><ul class="sig" id="sigList"></ul></div>
-    </div>
-    <div class="cards3">
-      <article class="glass card"><div class="ico">◇</div><h3>Transparency</h3><p>Each stage of the workflow is named, so you always know what has and hasn’t been examined.</p></article>
-      <article class="glass card"><div class="ico">≈</div><h3>Uncertainty</h3><p>Findings should carry their limits. A responsible tool never presents a guess as a fact.</p></article>
-      <article class="glass card"><div class="ico">○</div><h3>Human judgment</h3><p>Analysis supports the reviewer; it doesn’t replace them. The final call stays with people.</p></article>
-    </div>
-    <div class="glass faq"><details open><summary>Does VeriSense give real verdicts?</summary><p>Only once a validated detection model or API is connected. Until then, the interface never invents results or confidence scores.</p></details><details><summary>Which files can I use?</summary><p>Image, video and audio each have their own pathway. Supported formats depend on the detector you connect.</p></details><details><summary>Are my files uploaded anywhere?</summary><p>No. When you start a scan, the selected file is sent to VeriSense’s server-side function and Sightengine for analysis.</p></details></div>
-    <div class="glass cta-band"><h2>Ready to take<br><em class="grad">a closer look?</em></h2><button class="pill primary" data-page="detect">Open the detection lab <span class="arrow">↗</span></button></div>
   </div>
 </section>
 <section class="page" id="page-about" aria-label="About VeriSense">
@@ -301,18 +279,48 @@ body.vs-intro-active{overflow:hidden}
 })();
 
 (()=>{
-const pages=['home','detect','method','about'];
-function setActive(page){document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page))}
-function go(page){if(!pages.includes(page))page='home';const el=document.getElementById('page-'+page);if(page==='home')window.scrollTo({top:0,behavior:'smooth'});else el.scrollIntoView({behavior:'smooth',block:'start'});setActive(page)}
-function spy(){const off=(document.querySelector('.topbar').offsetHeight||76)+Math.min(innerHeight*.3,200);let cur='home';pages.forEach(k=>{const e=document.getElementById('page-'+k);if(e&&e.getBoundingClientRect().top<=off)cur=k});if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)cur=pages[pages.length-1];setActive(cur);const h=document.documentElement.scrollHeight-innerHeight;document.getElementById('progress').style.width=(h>0?scrollY/h*100:0)+'%'}
-addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);setTimeout(spy,0);
+const pages=['home','detect','about'];
+function setActive(page){
+  pages.forEach(key=>{
+    const section=document.getElementById('page-'+key);
+    if(section){const active=key===page;section.classList.toggle('active',active);section.setAttribute('aria-hidden',String(!active))}
+  });
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+}
+function go(page){
+  if(!pages.includes(page))page='home';
+  setActive(page);
+  window.scrollTo({top:0,behavior:'smooth'});
+  closeFab();
+}
+setActive('home');
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();go(b.dataset.page)}));
 const config={image:{title:'Image detection',accept:'image/*',head:'Bring an image into focus.',copy:'Supported formats depend on your connected detector.'},video:{title:'Video detection',accept:'video/*',head:'Inspect motion, frame by frame.',copy:'Choose a video file for the video analysis workflow.'},audio:{title:'Audio detection',accept:'audio/*',head:'Listen beyond the waveform.',copy:'Choose an audio file for the audio analysis workflow.'}};
 let mode='image', selectedFile=null;
 const input=document.getElementById('fileInput'), drop=document.getElementById('dropzone'), name=document.getElementById('fileName'), panel=document.getElementById('resultPanel');
 function setMode(m){mode=m;selectedFile=null;input.value='';name.textContent='';panel.classList.remove('show');document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));input.accept=config[m].accept;document.getElementById('dropTitle').textContent=config[m].head;document.getElementById('dropCopy').innerHTML=config[m].copy+'<br>Drag and drop or browse your device.'}
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
-function takeFile(f){if(!f)return;selectedFile=f;name.textContent=f.name+' · '+(f.size/1024/1024).toFixed(2)+' MB';panel.replaceChildren();const msg=document.createElement('div');msg.textContent='Ready to send to Sightengine for real analysis. Your file will be uploaded to the VeriSense server and then to Sightengine.';panel.appendChild(msg);const btn=document.createElement('button');btn.className='pill primary';btn.textContent='Analyze with Sightengine ↗';btn.style.marginTop='12px';btn.addEventListener('click',async()=>{btn.disabled=true;btn.textContent='Analyzing…';try{const result=await runSightengine(selectedFile,mode);renderResult(panel,result,mode)}catch(e){panel.textContent='Analysis failed: '+e.message+' No result was fabricated.'}finally{btn.disabled=false;btn.textContent='Analyze with Sightengine ↗'}});panel.appendChild(btn);panel.classList.add('show')}
+function takeFile(f){
+ if(!f)return;
+ selectedFile=f;
+ name.textContent=f.name+' · '+(f.size/1024/1024).toFixed(2)+' MB';
+ panel.replaceChildren();
+ const msg=document.createElement('div');
+ msg.textContent=mode==='audio'
+  ? 'Audio file selected. The audio workflow is ready for a dedicated audio-authenticity engine.'
+  : 'Ready to send to Sightengine for real analysis. Your file will be uploaded to the VeriSense server and then to Sightengine.';
+ panel.appendChild(msg);
+ if(mode==='audio'){
+  const note=document.createElement('p');note.className='result-explain';
+  note.textContent='Audio analysis is not yet connected to the current provider. No verdict will be generated until an audio detection service is configured.';
+  panel.appendChild(note);
+ }else{
+  const btn=document.createElement('button');btn.className='pill primary';btn.textContent='Analyze with Sightengine ↗';btn.style.marginTop='12px';
+  btn.addEventListener('click',async()=>{btn.disabled=true;btn.textContent='Analyzing…';try{const result=await runSightengine(selectedFile,mode);renderResult(panel,result,mode)}catch(e){panel.textContent='Analysis failed: '+e.message+' No result was fabricated.'}finally{btn.disabled=false;btn.textContent='Analyze with Sightengine ↗'}});
+  panel.appendChild(btn);
+ }
+ panel.classList.add('show');
+}
 input.addEventListener('change',()=>takeFile(input.files[0]));
 drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('drag')});drop.addEventListener('dragleave',()=>drop.classList.remove('drag'));drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('drag');const f=e.dataTransfer.files[0];if(f)takeFile(f)});
 const modal=document.getElementById('modalWrap'), modalFile=document.getElementById('modalFile'), modalName=document.getElementById('modalFileName'), modalAnalyze=document.getElementById('modalAnalyze'), modalResult=document.getElementById('modalResult');
