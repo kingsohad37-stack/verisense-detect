@@ -283,16 +283,18 @@ const pages=['home','detect','about'];
 function setActive(page){
   pages.forEach(key=>{
     const section=document.getElementById('page-'+key);
-    if(section){const active=key===page;section.classList.toggle('active',active);section.setAttribute('aria-hidden',String(!active))}
+    if(section){section.classList.toggle('active',key===page);section.setAttribute('aria-hidden','false')}
   });
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
 }
 function go(page){
   if(!pages.includes(page))page='home';
   setActive(page);
-  window.scrollTo({top:0,behavior:'smooth'});
+  const section=document.getElementById('page-'+page);
+  if(section)section.scrollIntoView({behavior:'smooth',block:'start'});
   closeFab();
 }
+
 setActive('home');
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();go(b.dataset.page)}));
 const config={image:{title:'Image detection',accept:'image/*',head:'Bring an image into focus.',copy:'Supported formats depend on your connected detector.'},video:{title:'Video detection',accept:'video/*',head:'Inspect motion, frame by frame.',copy:'Choose a video file for the video analysis workflow.'},audio:{title:'Audio detection',accept:'audio/*',head:'Listen beyond the waveform.',copy:'Choose an audio file for the audio analysis workflow.'}};
@@ -558,6 +560,25 @@ window.addEventListener('load',()=>{
  ST.refresh();
 },{once:true});
 </script>
+
+
+// Continuous-page navigation: keep every original section in the document flow.
+(()=>{
+ const sections=['home','detect','about'].map(k=>document.getElementById('page-'+k)).filter(Boolean);
+ if(!sections.length)return;
+ const nav=[...document.querySelectorAll('.nav button[data-page]')];
+ let queued=false;
+ const update=()=>{
+  queued=false;
+  const marker=Math.min(innerHeight*.38,220);
+  let current=sections[0];
+  for(const section of sections){if(section.getBoundingClientRect().top<=marker)current=section;}
+  nav.forEach(button=>button.classList.toggle('active',button.dataset.page===current.id.replace('page-','')));
+ };
+ addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(update)}},{passive:true});
+ addEventListener('resize',update,{passive:true});
+ update();
+})();
 
 </body>
 </html>
