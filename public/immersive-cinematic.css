@@ -1,0 +1,31 @@
+/* VeriSense immersive layer — stronger visual storytelling without changing layout geometry. */
+:root{--vs-ice:#b9d9ee;--vs-champagne:#ead4aa}
+.home-art{isolation:isolate}
+.home-art .hero-img{will-change:filter;animation:vsHeroBreath 18s ease-in-out infinite alternate}
+.home-art:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(112deg,transparent 0%,rgba(177,218,245,.0) 36%,rgba(177,218,245,.11) 49.7%,rgba(255,239,208,.16) 50%,transparent 64%);transform:translateX(-110%);animation:vsHeroLight 11s cubic-bezier(.4,0,.2,1) infinite;mix-blend-mode:screen}
+.home-art:before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 52%,transparent 38%,rgba(0,0,0,.34) 100%),linear-gradient(180deg,rgba(4,9,14,.12),transparent 24%,transparent 78%,rgba(4,9,14,.22))}
+.page-shell .display{background:linear-gradient(100deg,#f1ece3 5%,#d8c19a 32%,#fff8e9 48%,#d8c19a 62%,#f1ece3 80%);background-size:220% 100%;background-clip:text;-webkit-background-clip:text;color:transparent;animation:vsTitleGleam 12s ease-in-out infinite}
+.glass,.feature,.stat,.side-card{position:relative;isolation:isolate}
+.glass:after,.feature:after,.stat:after,.side-card:after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;opacity:0;background:linear-gradient(125deg,transparent 12%,rgba(185,217,238,.75) 34%,rgba(234,212,170,.85) 50%,transparent 72%);background-size:220% 220%;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;transition:opacity .35s}
+.glass:hover:after,.feature:hover:after,.stat:hover:after,.side-card:hover:after{opacity:1;animation:vsBorderFlow 2.8s linear infinite}
+.feature,.side-card,.stat{overflow:hidden}
+.feature:before,.side-card:before{content:"";position:absolute;inset:-1px;pointer-events:none;opacity:0;background:radial-gradient(360px circle at var(--vs-spot-x,50%) var(--vs-spot-y,50%),rgba(156,204,235,.13),transparent 68%);transition:opacity .45s}
+.feature:hover:before,.side-card:hover:before{opacity:1}
+.dropzone{position:relative;overflow:hidden}
+.dropzone:after{content:"";position:absolute;inset:-1px;pointer-events:none;border-radius:inherit;background:linear-gradient(105deg,transparent 20%,rgba(185,217,238,.13) 49%,rgba(234,212,170,.16) 51%,transparent 78%);transform:translateX(-110%);transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.dropzone:hover:after,.dropzone.drag:after{transform:translateX(110%)}
+.upload-icon{position:relative;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.dropzone:hover .upload-icon{transform:translateY(-4px) rotate(-5deg);box-shadow:0 0 0 8px rgba(216,193,154,.055),0 0 36px rgba(156,204,235,.2)}
+.pill.primary{position:relative;isolation:isolate}
+.pill:active,.mode:active,.close:active{transform:scale(.965)}
+.nav button.active{ text-shadow:0 0 18px rgba(234,212,170,.45)}
+#vs-scene-flare{position:fixed;z-index:3;left:0;right:0;top:0;height:1px;pointer-events:none;opacity:0;background:linear-gradient(90deg,transparent,rgba(185,217,238,.65),rgba(234,212,170,.85),transparent);box-shadow:0 0 24px 2px rgba(185,217,238,.24)}
+#vs-scene-flare.vs-flare-on{opacity:1;animation:vsFlarePass 1.1s ease-out forwards}
+.vs-ambient-word{display:inline-block;position:relative}
+@keyframes vsHeroBreath{0%{filter:saturate(1) contrast(1)}100%{filter:saturate(1.12) contrast(1.045)}}
+@keyframes vsHeroLight{0%,18%{transform:translateX(-110%);opacity:0}32%{opacity:1}66%,100%{transform:translateX(110%);opacity:0}}
+@keyframes vsTitleGleam{0%,65%{background-position:100% 50%}100%{background-position:-120% 50%}}
+@keyframes vsBorderFlow{to{background-position:220% 220%}}
+@keyframes vsFlarePass{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(100vh);opacity:0}}
+@media(max-width:700px){.home-art .hero-img{animation:none}.home-art:after{opacity:.55;animation-duration:18s}.page-shell .display{animation:none;background:none;color:var(--white)}}
+@media(prefers-reduced-motion:reduce){.home-art .hero-img,.home-art:after,.page-shell .display{animation:none}.dropzone:after{display:none}#vs-scene-flare{display:none}}
