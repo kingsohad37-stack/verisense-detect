@@ -563,6 +563,7 @@ window.addEventListener('load',()=>{
 </script>
 
 
+<script>
 // Continuous-page navigation: keep every original section in the document flow.
 (()=>{
  const sections=['home','detect','about'].map(k=>document.getElementById('page-'+k)).filter(Boolean);
@@ -580,6 +581,7 @@ window.addEventListener('load',()=>{
  addEventListener('resize',update,{passive:true});
  update();
 })();
+</script>
 
 </body>
 </html>
