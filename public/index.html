@@ -165,6 +165,7 @@ body.vs-intro-active{overflow:hidden}
 
 </style>
 <link rel="stylesheet" href="/cinematic-enhancement.css?v=2">
+  <link rel="stylesheet" href="/ambient-motion.css?v=1">
 </head>
 <body>
 
@@ -440,5 +441,9 @@ setHH();addEventListener('resize',setHH);addEventListener('load',setHH);if(docum
 })();
 </script>
 
+<script>
+/* Gentle pointer-reactive depth for the existing ambient background. */
+(()=>{const layer=document.querySelector('.orbs');if(!layer||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let x=0,y=0,tx=0,ty=0,raf=0;const move=e=>{tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2;if(!raf)raf=requestAnimationFrame(tick)};function tick(){x+=(tx-x)*.045;y+=(ty-y)*.045;layer.style.setProperty('--motion-x',x.toFixed(3));layer.style.setProperty('--motion-y',y.toFixed(3));if(Math.abs(tx-x)>.002||Math.abs(ty-y)>.002){raf=requestAnimationFrame(tick)}else raf=0}addEventListener('pointermove',move,{passive:true});})();
+</script>
 </body>
 </html>

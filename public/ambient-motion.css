@@ -1,0 +1,19 @@
+/* VeriSense cinematic atmosphere — additive only; preserves all existing layout and colors */
+.orbs{--motion-x:0;--motion-y:0;isolation:isolate}
+.orbs::before{content:"";position:absolute;inset:-24%;pointer-events:none;opacity:.72;filter:blur(42px);background:radial-gradient(ellipse at 22% 32%,rgba(67,151,173,.19),transparent 34%),radial-gradient(ellipse at 76% 58%,rgba(177,151,105,.13),transparent 37%),radial-gradient(ellipse at 48% 90%,rgba(46,104,126,.14),transparent 32%);transform:translate3d(calc(var(--motion-x)*-14px),calc(var(--motion-y)*-10px),0);animation:vsAtmosphere 24s ease-in-out infinite alternate}
+.orbs::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.14;background-image:linear-gradient(rgba(216,193,154,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(216,193,154,.10) 1px,transparent 1px);background-size:76px 76px;mask-image:linear-gradient(transparent,black 18%,black 78%,transparent);animation:vsGrid 28s linear infinite}
+.orb{will-change:transform;mix-blend-mode:screen;opacity:.62;filter:blur(72px);transform:translate3d(calc(var(--motion-x)*var(--orb-depth,1)*8px),calc(var(--motion-y)*var(--orb-depth,1)*7px),0);transition:opacity .5s}
+.o1{--orb-depth:-1.3;animation:vsFloatOne 19s ease-in-out infinite alternate}
+.o2{--orb-depth:1.1;animation:vsFloatTwo 23s ease-in-out infinite alternate}
+.o3{--orb-depth:.65;animation:vsFloatThree 17s ease-in-out infinite alternate}
+.home-art{isolation:isolate}
+.home-art::after{content:"";position:absolute;inset:-100% 0;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent 46%,rgba(232,213,177,.075) 50%,transparent 54%);animation:vsScan 13s linear infinite;mix-blend-mode:screen}
+.home-art::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 48%,rgba(0,0,0,.26) 100%),linear-gradient(115deg,transparent 35%,rgba(255,255,255,.045) 50%,transparent 65%);opacity:.7}
+@keyframes vsAtmosphere{0%{transform:translate3d(calc(var(--motion-x)*-14px),calc(var(--motion-y)*-10px),0) scale(1)}100%{transform:translate3d(calc(var(--motion-x)*14px),calc(var(--motion-y)*10px),0) scale(1.08)}}
+@keyframes vsGrid{to{background-position:76px 76px}}
+@keyframes vsFloatOne{to{transform:translate3d(36px,-24px,0) scale(1.08)}}
+@keyframes vsFloatTwo{to{transform:translate3d(-42px,28px,0) scale(.94)}}
+@keyframes vsFloatThree{to{transform:translate3d(18px,-32px,0) scale(1.06)}}
+@keyframes vsScan{to{transform:translateY(200%)}}
+@media(max-width:700px){.orbs::before{opacity:.48;filter:blur(54px)}.orbs::after{opacity:.08;background-size:52px 52px}.orb{filter:blur(86px);opacity:.42}.home-art::after{animation-duration:18s;opacity:.6}}
+@media(prefers-reduced-motion:reduce){.orbs::before,.orbs::after,.orb,.home-art::after{animation:none!important;transition:none!important}.orb{transform:none!important}}
