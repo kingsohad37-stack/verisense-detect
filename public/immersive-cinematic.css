@@ -29,3 +29,27 @@
 @keyframes vsFlarePass{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(100vh);opacity:0}}
 @media(max-width:700px){.home-art .hero-img{animation:none}.home-art:after{opacity:.55;animation-duration:18s}.page-shell .display{animation:none;background:none;color:var(--white)}}
 @media(prefers-reduced-motion:reduce){.home-art .hero-img,.home-art:after,.page-shell .display{animation:none}.dropzone:after{display:none}#vs-scene-flare{display:none}}
+
+
+/* Readability correction: keep the home hero artwork and its embedded lettering crisp. */
+.home-art .hero-img {
+  filter: none !important;
+  animation: none !important;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+.home-art::before {
+  background: linear-gradient(180deg, rgba(4,9,14,.035), transparent 22%, transparent 82%, rgba(4,9,14,.06)) !important;
+}
+.home-art::after {
+  opacity: .22 !important;
+  mix-blend-mode: normal !important;
+}
+#vs-cinema-stage canvas { opacity: .28 !important; }
+#vs-cinema-stage::before {
+  background: radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(1,4,8,.10) 100%) !important;
+}
+@media (max-width:700px) {
+  .home-art::after { opacity: .12 !important; }
+  #vs-cinema-stage canvas { opacity: .18 !important; }
+}
