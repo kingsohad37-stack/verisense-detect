@@ -164,54 +164,60 @@ body.vs-intro-active{overflow:hidden}
 @media(prefers-reduced-motion:reduce){#vs-film-canvas,.home-art .vs-anamorphic{display:none!important}}
 
 
-/* ===== Simple homepage copy overlays (text-only; original artwork and layout retained) ===== */
-.home-art .vs-copy-layer,
-.home-art .vs-feature-strip,
-.home-art .vs-category-copy{position:absolute;z-index:4;color:#f1ece3;pointer-events:none}
-.home-art .vs-copy-layer{
-  left:6.8%;top:8%;width:34%;min-height:47%;padding:1.4% 1.2% 1.2%;
-  background:linear-gradient(90deg,rgba(4,7,9,.94) 0%,rgba(4,7,9,.88) 78%,rgba(4,7,9,.10) 100%);
+/* ===== Homepage copy: clean opaque panels prevent old artwork text showing through ===== */
+.home-art .vs-copy-layer,.home-art .vs-feature-strip,.home-art .vs-category-copy{
+  position:absolute;z-index:4;color:#f1ece3;pointer-events:none;text-shadow:0 1px 8px #000;
 }
-.home-art .vs-tagline{font:clamp(7px,.65vw,10px)/1.5 Arial,sans-serif;letter-spacing:.28em;color:#d8c19a;margin-bottom:4.2%}
-.home-art .vs-copy-layer h1{font:clamp(27px,3.45vw,54px)/.99 Georgia,"Times New Roman",serif;letter-spacing:-.045em;font-weight:400;margin:0 0 3.4%;max-width:570px}
+.home-art .vs-copy-layer{
+  left:5.5%;top:7.5%;width:39%;height:48%;padding:2% 2% 1.5%;
+  background:linear-gradient(90deg,rgba(3,6,8,.985) 0%,rgba(3,6,8,.985) 88%,rgba(3,6,8,.94) 96%,rgba(3,6,8,0) 100%);
+  border-radius:3px;
+}
+.home-art .vs-tagline{font:clamp(7px,.65vw,10px)/1.5 Arial,sans-serif;letter-spacing:.25em;color:#d8c19a;margin:0 0 3.5%}
+.home-art .vs-copy-layer h1{font:clamp(27px,3.45vw,54px)/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;font-weight:400;margin:0 0 3.2%;max-width:570px}
 .home-art .vs-copy-layer h1 em{font-style:normal;color:#d8c39f}
-.home-art .vs-copy-layer p{font:clamp(9px,.88vw,14px)/1.65 Arial,sans-serif;color:#d0d0cc;max-width:440px;margin:0 0 4.5%}
+.home-art .vs-copy-layer p{font:clamp(9px,.88vw,14px)/1.6 Arial,sans-serif;color:#d0d0cc;max-width:440px;margin:0 0 4%}
 .home-art .vs-check-button{pointer-events:auto;display:inline-flex;align-items:center;gap:22px;border:1px solid rgba(226,205,169,.7);border-radius:999px;padding:clamp(7px,.8vw,12px) clamp(13px,1.4vw,21px);background:linear-gradient(115deg,#d7c19a,#f0e4ce 55%,#bda77e);color:#171613;font:clamp(9px,.78vw,12px) Arial,sans-serif;cursor:pointer;box-shadow:0 8px 28px #0007}
-.home-art .vs-feature-strip{left:7%;top:56.5%;display:flex;align-items:center;gap:clamp(7px,1.4vw,22px);padding:5px 10px;background:rgba(4,7,9,.78);font:clamp(6px,.62vw,9px) Arial,sans-serif;letter-spacing:.07em;color:#e0d8c9;white-space:nowrap}
+.home-art .vs-feature-strip{
+  left:5.5%;top:56.5%;min-height:5%;display:flex;align-items:center;gap:clamp(7px,1.4vw,22px);
+  padding:5px 12px;background:rgba(3,6,8,.97);font:clamp(6px,.62vw,9px) Arial,sans-serif;
+  letter-spacing:.07em;color:#e0d8c9;white-space:nowrap;border-radius:3px;
+}
 .home-art .vs-feature-strip i{display:block;width:1px;height:12px;background:rgba(216,193,154,.55)}
-.home-art .vs-category-copy{top:82%;height:15%;padding:1.1% 1.2%;background:linear-gradient(90deg,rgba(4,7,9,.94),rgba(4,7,9,.78) 82%,rgba(4,7,9,.1));}
+.home-art .vs-category-copy{
+  top:81%;height:17%;padding:1.1% 1.2%;
+  background:rgba(3,6,8,.985);border-radius:0 0 10px 10px;
+}
 .home-art .vs-image-copy{left:6.5%;width:27.4%}
 .home-art .vs-video-copy{left:36.7%;width:27.2%}
 .home-art .vs-audio-copy{left:67%;width:27.2%}
 .home-art .vs-category-copy h2{font:clamp(12px,1.35vw,20px)/1.15 Georgia,"Times New Roman",serif;font-weight:400;margin:0 0 2.5%;color:#f0e6d5}
 .home-art .vs-category-copy p{font:clamp(7px,.72vw,11px)/1.45 Arial,sans-serif;color:#c5c5c0;margin:0;max-width:95%}
-.home-art .vs-copy-layer,.home-art .vs-feature-strip,.home-art .vs-category-copy{ text-shadow:0 1px 8px #000; }
 @media(max-width:850px){
- .home-art .vs-copy-layer{left:5%;top:6%;width:45%;min-height:48%;padding:2% 2%;background:linear-gradient(90deg,rgba(4,7,9,.96),rgba(4,7,9,.84) 85%,transparent)}
+ .home-art .vs-copy-layer{left:4%;top:5%;width:49%;height:50%;padding:2% 2%;background:rgba(3,6,8,.97)}
  .home-art .vs-tagline{font-size:clamp(6px,1.15vw,9px);letter-spacing:.16em;margin-bottom:4%}
  .home-art .vs-copy-layer h1{font-size:clamp(19px,4vw,34px);margin-bottom:3%}
  .home-art .vs-copy-layer p{font-size:clamp(7px,1.25vw,10px);line-height:1.45;margin-bottom:3%}
- .home-art .vs-feature-strip{left:5%;top:57%;gap:8px;font-size:clamp(5px,1vw,8px)}
- .home-art .vs-category-copy{top:82%;height:16%;padding:1.3%}
+ .home-art .vs-feature-strip{left:4%;top:57%;gap:8px;font-size:clamp(5px,1vw,8px);background:rgba(3,6,8,.98)}
+ .home-art .vs-category-copy{top:81%;height:18%;padding:1.3%;background:rgba(3,6,8,.99)}
  .home-art .vs-category-copy h2{font-size:clamp(9px,1.7vw,14px)}
  .home-art .vs-category-copy p{font-size:clamp(6px,1.05vw,8px);line-height:1.3}
 }
 @media(max-width:560px){
- .home-art .vs-copy-layer{left:4%;top:5%;width:54%;min-height:49%;padding:2% 2.2%}
+ .home-art .vs-copy-layer{left:3.5%;top:4%;width:57%;height:51%;padding:2% 2.2%}
  .home-art .vs-tagline{font-size:6px;letter-spacing:.11em}
  .home-art .vs-copy-layer h1{font-size:clamp(17px,5vw,23px)}
  .home-art .vs-copy-layer p{font-size:7px;max-width:98%}
  .home-art .vs-check-button{font-size:7px;padding:6px 10px;gap:10px}
- .home-art .vs-feature-strip{left:4%;top:57%;gap:5px;font-size:5px;padding:4px 5px;letter-spacing:0}
+ .home-art .vs-feature-strip{left:3.5%;top:57%;gap:5px;font-size:5px;padding:4px 5px;letter-spacing:0}
  .home-art .vs-feature-strip i{height:8px}
- .home-art .vs-category-copy{top:82%;height:17%;padding:1.2%}
+ .home-art .vs-category-copy{top:81%;height:18.5%;padding:1.2%;background:rgba(3,6,8,.99)}
  .home-art .vs-image-copy{left:5.5%;width:28.5%}
  .home-art .vs-video-copy{left:35.8%;width:28.5%}
  .home-art .vs-audio-copy{left:66%;width:28.5%}
  .home-art .vs-category-copy h2{font-size:clamp(7px,2vw,10px);margin-bottom:3%}
  .home-art .vs-category-copy p{font-size:clamp(5px,1.35vw,7px);line-height:1.2}
 }
-
 </style>
 <link rel="stylesheet" href="/cinematic-enhancement.css?v=2">
   <link rel="stylesheet" href="/ambient-motion.css?v=1">
