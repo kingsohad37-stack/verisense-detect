@@ -1,0 +1,37 @@
+/* VeriSense — movie-grade interaction layer. Additive: no layout or detector changes. */
+:root{--vs-ink:#05080c;--vs-cinema-gold:rgba(224,196,145,.9);--vs-cinema-blue:rgba(116,190,244,.85)}
+#vs-cinema-stage{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden;contain:strict;isolation:isolate}
+#vs-cinema-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.8;mix-blend-mode:screen}
+#vs-cinema-stage:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 38%,rgba(1,4,8,.28) 100%),linear-gradient(180deg,rgba(4,8,13,.16),transparent 20%,transparent 78%,rgba(4,8,13,.18));}
+#vs-cinema-stage:after{content:"";position:absolute;inset:-40% -20%;opacity:.12;background:linear-gradient(112deg,transparent 43%,rgba(191,224,248,.18) 49.7%,rgba(255,242,216,.32) 50%,transparent 51.3%);transform:translateX(-75%);animation:vsFilmSweep 18s cubic-bezier(.4,0,.2,1) infinite;mix-blend-mode:screen}
+#vs-progress{position:fixed;z-index:35;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:left center;background:linear-gradient(90deg,#8bbfe5,#f0d9ae,#fff4df);box-shadow:0 0 12px #9bcdf0,0 0 28px #d9bd8b;pointer-events:none}
+#vs-cursor{position:fixed;z-index:36;left:0;top:0;width:34px;height:34px;border:1px solid rgba(230,211,175,.7);border-radius:50%;pointer-events:none;opacity:0;transform:translate3d(-100px,-100px,0) translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s,background .25s,opacity .2s;mix-blend-mode:screen}
+#vs-cursor:before,#vs-cursor:after{content:"";position:absolute;background:rgba(226,211,181,.72);left:50%;top:50%;transform:translate(-50%,-50%)}
+#vs-cursor:before{width:4px;height:4px;border-radius:50%}#vs-cursor:after{width:48px;height:1px;opacity:.25}
+#vs-cursor.is-hot{width:54px;height:54px;border-color:rgba(155,213,255,.95);background:rgba(125,190,236,.08);box-shadow:0 0 28px rgba(108,183,235,.24)}
+#vs-cursor.is-hot:before{background:#d9efff;box-shadow:0 0 12px #9dd8ff}
+body.vs-cinema-ready{cursor:auto}
+@media(pointer:fine){body.vs-cinema-ready a,body.vs-cinema-ready button,[role=button]{cursor:none}body.vs-cinema-ready input,body.vs-cinema-ready textarea{cursor:text}}
+.vs-interactive{position:relative;isolation:isolate;--vs-spot-x:50%;--vs-spot-y:50%;transition:transform .35s cubic-bezier(.2,.75,.25,1),border-color .3s,box-shadow .35s}
+.vs-interactive:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;opacity:0;background:radial-gradient(240px circle at var(--vs-spot-x) var(--vs-spot-y),rgba(184,220,246,.14),rgba(224,196,145,.06) 34%,transparent 72%);transition:opacity .35s}
+.vs-interactive:hover:before{opacity:1}
+.vs-interactive>*{position:relative;z-index:1}
+button,.pill,.mode,.nav button,.close,.fab{ -webkit-tap-highlight-color:transparent}
+.pill,.mode,.nav button,.close,.fab,.home-hotspot,.faq summary{transition-timing-function:cubic-bezier(.2,.75,.25,1)}
+.pill,.mode,.close,.fab,.nav button{overflow:hidden}
+.pill:after,.mode:after,.close:after,.fab:after{content:"";position:absolute;inset:-80% -40%;pointer-events:none;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.28) 50%,transparent 58%);transform:translateX(-115%) rotate(8deg);transition:transform .75s cubic-bezier(.2,.7,.2,1)}
+.pill:hover:after,.mode:hover:after,.close:hover:after,.fab:hover:after{transform:translateX(115%) rotate(8deg)}
+.pill:hover,.mode:hover,.close:hover,.fab:hover{filter:brightness(1.12)}
+.glass.vs-interactive:hover{transform:translateY(-3px);border-color:rgba(208,220,226,.34);box-shadow:0 26px 80px rgba(0,0,0,.5),0 0 35px rgba(100,168,213,.11),inset 0 1px 0 rgba(255,255,255,.14)}
+.feature.vs-interactive:hover,.card.vs-interactive:hover{transform:translateY(-5px)}
+.vs-ripple{position:absolute;z-index:8;pointer-events:none;width:10px;height:10px;border-radius:50%;border:1px solid rgba(245,224,185,.8);background:radial-gradient(circle,rgba(240,221,185,.22),transparent 68%);transform:translate(-50%,-50%) scale(.1);animation:vsRipple .8s cubic-bezier(.12,.7,.25,1) forwards}
+.vs-ripple:after{content:"";position:absolute;inset:-8px;border:1px solid rgba(139,199,239,.5);border-radius:50%}
+.vs-burst{position:fixed;z-index:37;width:5px;height:5px;border-radius:50%;pointer-events:none;background:#f0d9ae;box-shadow:0 0 12px 3px rgba(231,205,157,.65);animation:vsSpark .72s ease-out forwards}
+.vs-reveal{opacity:0;transform:translate3d(0,18px,0);filter:blur(3px);transition:opacity .85s ease,transform .85s cubic-bezier(.16,1,.3,1),filter .85s ease}
+.vs-reveal.vs-in{opacity:1;transform:none;filter:none}
+.topbar .nav button:focus-visible,.pill:focus-visible,.mode:focus-visible,.close:focus-visible{outline:1px solid #e9d5ad;outline-offset:4px}
+@keyframes vsFilmSweep{0%,22%{transform:translateX(-75%);opacity:0}35%{opacity:1}72%,100%{transform:translateX(75%);opacity:0}}
+@keyframes vsRipple{0%{opacity:.85;transform:translate(-50%,-50%) scale(.1)}100%{opacity:0;transform:translate(-50%,-50%) scale(16)}}
+@keyframes vsSpark{0%{opacity:1;transform:translate3d(0,0,0) scale(1)}100%{opacity:0;transform:translate3d(var(--dx),var(--dy),0) scale(.05)}}
+@media(max-width:700px){#vs-cinema-stage canvas{opacity:.52}#vs-cinema-stage:after{opacity:.07;animation-duration:28s}#vs-cursor{display:none}.vs-reveal{filter:none;transform:translateY(10px)}}
+@media(prefers-reduced-motion:reduce){#vs-cinema-stage:after{animation:none}#vs-cursor{display:none}.vs-reveal{opacity:1;transform:none;filter:none;transition:none}.vs-interactive,.pill,.mode,.close,.fab{transition:none!important}.pill:after,.mode:after,.close:after,.fab:after{display:none}.vs-ripple,.vs-burst{display:none}}
