@@ -422,7 +422,7 @@ document.getElementById('closeModal').addEventListener('click',()=>modal.classLi
 
 async function runSightengine(file,kind){
 if(kind==='audio')throw new Error('Audio detection is not supported by this integration.');
-const max=4*1024*1024;if(file.size>max)throw new Error('Choose a file no larger than 4 MB.');
+const max=4*1024*1024;if(kind==='image'&&file.size>max)throw new Error('Choose an image no larger than 4 MB.');
 if(kind==='image'){if(file.type&&!file.type.startsWith('image/'))throw new Error('Choose an image file.');return await submitFrame(file);}
 if(kind!=='video'||(file.type&&!file.type.startsWith('video/')))throw new Error('Choose a video file.');
 const frames=await extractVideoFrames(file,2);if(!frames.length)throw new Error('Could not extract frames from this video. Try MP4 or WebM.');
