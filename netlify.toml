@@ -1,5 +1,5 @@
 [build]
-  command = "cp verisense-homepage-refined.png public/verisense-homepage.png"
+  command = "cp verisense-homepage-final.jpeg public/verisense-homepage.png"
   publish = "public"
   functions = "netlify/functions"
 
